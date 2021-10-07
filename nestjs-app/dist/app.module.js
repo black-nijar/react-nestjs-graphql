@@ -12,11 +12,22 @@ const config_1 = require("@nestjs/config");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const database_module_1 = require("./database/database.module");
+const graphql_1 = require("@nestjs/graphql");
+const compoents_module_1 = require("./compoents/compoents.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot(), database_module_1.DatabaseModule],
+        imports: [
+            config_1.ConfigModule.forRoot(),
+            database_module_1.DatabaseModule,
+            graphql_1.GraphQLModule.forRoot({
+                playground: process.env.NODE_ENV === 'development' ? true : false,
+                debug: process.env.NODE_ENV === 'development' ? true : false,
+                autoSchemaFile: true,
+            }),
+            compoents_module_1.ComponentsModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
