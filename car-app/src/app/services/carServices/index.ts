@@ -7,7 +7,6 @@ class CarService {
     const response = await apolloClient
       .query({ query: GET_ALL_CARS })
       .catch((err) => {
-        console.log(err);
         throw err;
       });
     console.log({ response });
